@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DarkBeams Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+        color: red;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
+
+    /* Sparkle Background */
+    #sparkles {
+        position: fixed;
+        top:0; left:0;
+        width:100%; height:100%;
+        pointer-events:none;
+        z-index:-1;
+    }
+
+    /* Loader */
+    #loader {
+        position:fixed;
+        top:0; left:0;
+        width:100%; height:100%;
+        background:#000;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex-direction:column;
+        z-index:9999;
+    }
+    .loader-circle {
+        width:60px; height:60px;
+        border:6px solid #222;
+        border-top:6px solid red;
+        border-radius:50%;
+        animation:spin 1s linear infinite;
+    }
+    @keyframes spin {
+        100% {transform:rotate(360deg);}
+    }
+    .loader-text {
+        margin-top:15px;
+        color:red;
+        font-weight:600;
+    }
+
+    /* Header */
+    header {
+        text-align:center;
+        padding:100px 20px 50px 20px;
+    }
+    header h1 {
+        font-size:3rem;
+        color:red;
+        margin-bottom:15px;
+        text-shadow:0 0 15px rgba(255,0,0,0.8);
+    }
+    header p {
+        color:#ff7a7a;
+        font-size:1.1rem;
+        max-width:500px;
+        margin:0 auto;
+    }
+    .typing {
+        border-right:2px solid red;
+        animation:blink 0.8s infinite;
+    }
+    @keyframes blink {
+        50% {border-color:transparent;}
+    }
+
+    /* Buttons */
+    .btn {
+        display:inline-block;
+        margin:15px 10px;
+        padding:15px 35px;
+        font-size:1.1rem;
+        font-weight:600;
+        color:white;
+        background:rgba(255,0,0,0.2);
+        border:2px solid red;
+        border-radius:50px;
+        cursor:pointer;
+        transition:all 0.3s ease;
+        box-shadow:0 0 15px rgba(255,0,0,0.6), inset 0 0 10px rgba(255,0,0,0.3);
+        position:relative;
+        overflow:hidden;
+    }
+    .btn:hover {
+        transform:scale(1.08);
+        box-shadow:0 0 25px rgba(255,0,0,1), inset 0 0 15px rgba(255,0,0,0.5);
+    }
+    .btn:active {transform:scale(0.95);}
+    
+    /* Cards Section */
+    .cards {
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        padding:50px 20px;
+        gap:20px;
+    }
+    .card {
+        background:rgba(20,0,0,0.6);
+        border:1px solid red;
+        border-radius:15px;
+        padding:30px 20px;
+        width:180px;
+        text-align:center;
+        backdrop-filter:blur(10px);
+        box-shadow:0 0 15px rgba(255,0,0,0.6);
+        transition:transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+        transform:translateY(-8px) scale(1.05);
+        box-shadow:0 0 30px rgba(255,0,0,1);
+    }
+    .card i {
+        font-size:2rem;
+        color:red;
+        margin-bottom:12px;
+        display:block;
+    }
+    .card h2 {
+        font-size:1.4rem;
+        margin-bottom:8px;
+        color:red;
+    }
+    .card p {
+        font-size:0.9rem;
+        color:#ff7a7a;
+    }
+
+    /* Side Navigation */
+    nav {
+        position:fixed;
+        top:50%;
+        left:20px;
+        transform:translateY(-50%);
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+        z-index:100;
+    }
+    nav a {
+        color:white;
+        text-decoration:none;
+        font-size:0.9rem;
+        padding:10px 15px;
+        border:1px solid red;
+        border-radius:30px;
+        background:rgba(255,0,0,0.2);
+        box-shadow:0 0 10px rgba(255,0,0,0.6);
+        transition:all 0.3s;
+    }
+    nav a:hover {
+        background:red;
+        color:white;
+        box-shadow:0 0 20px red;
+    }
+
+    /* Footer */
+    footer {
+        text-align:center;
+        padding:30px 10px;
+        font-size:0.9rem;
+        color:#ff7a7a;
+    }
+
+</style>
+</head>
+<body>
+
+<!-- Loader -->
+<div id="loader">
+    <div class="loader-circle"></div>
+    <div class="loader-text">Loading DarkBeams Hub...</div>
+</div>
+
+<!-- Sparkle Background -->
+<canvas id="sparkles"></canvas>
+
+<!-- Navigation -->
+<nav>
+    <a href="#top">Home</a>
+    <a href="#cards">Stats</a>
+    <a href="#tools">Tools</a>
+    <a href="#about">About</a>
+</nav>
+
+<!-- Header -->
+<header id="top">
+    <h1><span id="typing"></span></h1>
+    <p>Lightning-fast beam generators, advanced tools, and secure access — all in one hub.</p>
+    <div>
+        <button class="btn" onclick="window.location.href='https://shorturl.at/1xSyI'">DarkBeams (Immortal)</button>
+        <button class="btn" onclick="window.location.href='https://shorturl.at/rSmfF'">DarkBeams (Splunk)</button>
+        <button class="btn" onclick="alert('Webhook spammer is disabled for safety!')">Webhook Spammer</button>
+    </div>
+</header>
+
+<!-- Cards -->
+<section id="cards" class="cards">
+    <div class="card">
+        <i>⚡</i>
+        <h2>99.9%</h2>
+        <p>Beam Uptime</p>
+    </div>
+    <div class="card">
+        <i>📈</i>
+        <h2>98.7%</h2>
+        <p>Beam Success</p>
+    </div>
+    <div class="card">
+        <i>🌐</i>
+        <h2>1K+</h2>
+        <p>Active Beamers</p>
+    </div>
+    <div class="card">
+        <i>⏱️</i>
+        <h2>&lt;1.2s</h2>
+        <p>Beam Speed</p>
+    </div>
+</section>
+
+<!-- About -->
+<section id="about" style="text-align:center;padding:50px 20px;">
+    <h2 style="color:red;text-shadow:0 0 10px red;">About DarkBeams</h2>
+    <p style="max-width:600px;margin:20px auto;color:#ff7a7a;">
+        DarkBeams Hub is designed for lightning-fast tools with maximum uptime. This futuristic dashboard 
+        gives you the feel of entering a real hacking HQ while keeping everything stylish, safe, and smooth.
+    </p>
+</section>
+
+<!-- Footer -->
+<footer>
+    ⚡ DarkBeams Hub — We are not breaking any DC rules ⚡
+</footer>
+
+<script>
+/* Loader */
+window.addEventListener("load", () => {
+    document.getElementById("loader").style.display = "none";
+});
+
+/* Typing Effect */
+const text = "⚡ DarkBeams Hub ⚡";
+let i = 0;
+function typingEffect(){
+    if(i < text.length){
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typingEffect,100);
+    }
+}
+typingEffect();
+
+/* Sparkles */
+const canvas = document.getElementById("sparkles");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+class Particle {
+    constructor(){
+        this.x = Math.random()*canvas.width;
+        this.y = Math.random()*canvas.height;
+        this.size = Math.random()*2+1;
+        this.speedX = Math.random()*0.5-0.25;
+        this.speedY = Math.random()*0.5-0.25;
+    }
+    update(){
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if(this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height){
+            this.x = Math.random()*canvas.width;
+            this.y = Math.random()*canvas.height;
+        }
+    }
+    draw(){
+        ctx.fillStyle = "rgba(255,0,0,0.8)";
+        ctx.shadowColor = "red";
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+        ctx.fill();
+    }
+}
+function init(){
+    particles = [];
+    for(let i=0;i<120;i++){particles.push(new Particle());}
+}
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+        p.update();
+        p.draw();
+    });
+    requestAnimationFrame(animate);
+}
+init();
+animate();
+window.addEventListener("resize", ()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+});
+</script>
+
+</body>
+</html>
