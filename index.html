@@ -6,11 +6,17 @@
 <title>DarkBeams Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
+    :root {
+        --main-color: red;
+        --secondary-color: #ff7a7a;
+        --bg-gradient: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+    }
+
     * {margin:0;padding:0;box-sizing:border-box;}
     body {
         font-family: 'Poppins', sans-serif;
-        background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
-        color: red;
+        background: var(--bg-gradient);
+        color: var(--main-color);
         overflow-x: hidden;
         scroll-behavior: smooth;
     }
@@ -39,18 +45,12 @@
     .loader-circle {
         width:60px; height:60px;
         border:6px solid #222;
-        border-top:6px solid red;
+        border-top:6px solid var(--main-color);
         border-radius:50%;
         animation:spin 1s linear infinite;
     }
-    @keyframes spin {
-        100% {transform:rotate(360deg);}
-    }
-    .loader-text {
-        margin-top:15px;
-        color:red;
-        font-weight:600;
-    }
+    @keyframes spin {100% {transform:rotate(360deg);}}
+    .loader-text {margin-top:15px;color:var(--main-color);font-weight:600;}
 
     /* Header */
     header {
@@ -59,23 +59,18 @@
     }
     header h1 {
         font-size:3rem;
-        color:red;
         margin-bottom:15px;
+        color:var(--main-color);
         text-shadow:0 0 15px rgba(255,0,0,0.8);
     }
     header p {
-        color:#ff7a7a;
+        color:var(--secondary-color);
         font-size:1.1rem;
         max-width:500px;
         margin:0 auto;
     }
-    .typing {
-        border-right:2px solid red;
-        animation:blink 0.8s infinite;
-    }
-    @keyframes blink {
-        50% {border-color:transparent;}
-    }
+    .typing {border-right:2px solid var(--main-color);animation:blink 0.8s infinite;}
+    @keyframes blink {50% {border-color:transparent;}}
 
     /* Buttons */
     .btn {
@@ -86,13 +81,11 @@
         font-weight:600;
         color:white;
         background:rgba(255,0,0,0.2);
-        border:2px solid red;
+        border:2px solid var(--main-color);
         border-radius:50px;
         cursor:pointer;
         transition:all 0.3s ease;
         box-shadow:0 0 15px rgba(255,0,0,0.6), inset 0 0 10px rgba(255,0,0,0.3);
-        position:relative;
-        overflow:hidden;
     }
     .btn:hover {
         transform:scale(1.08);
@@ -110,7 +103,7 @@
     }
     .card {
         background:rgba(20,0,0,0.6);
-        border:1px solid red;
+        border:1px solid var(--main-color);
         border-radius:15px;
         padding:30px 20px;
         width:180px;
@@ -123,27 +116,14 @@
         transform:translateY(-8px) scale(1.05);
         box-shadow:0 0 30px rgba(255,0,0,1);
     }
-    .card i {
-        font-size:2rem;
-        color:red;
-        margin-bottom:12px;
-        display:block;
-    }
-    .card h2 {
-        font-size:1.4rem;
-        margin-bottom:8px;
-        color:red;
-    }
-    .card p {
-        font-size:0.9rem;
-        color:#ff7a7a;
-    }
+    .card i {font-size:2rem;margin-bottom:12px;display:block;color:var(--main-color);}
+    .card h2 {font-size:1.4rem;margin-bottom:8px;color:var(--main-color);}
+    .card p {font-size:0.9rem;color:var(--secondary-color);}
 
     /* Side Navigation */
     nav {
         position:fixed;
-        top:50%;
-        left:20px;
+        top:50%; left:20px;
         transform:translateY(-50%);
         display:flex;
         flex-direction:column;
@@ -155,16 +135,16 @@
         text-decoration:none;
         font-size:0.9rem;
         padding:10px 15px;
-        border:1px solid red;
+        border:1px solid var(--main-color);
         border-radius:30px;
         background:rgba(255,0,0,0.2);
         box-shadow:0 0 10px rgba(255,0,0,0.6);
         transition:all 0.3s;
     }
     nav a:hover {
-        background:red;
+        background:var(--main-color);
         color:white;
-        box-shadow:0 0 20px red;
+        box-shadow:0 0 20px var(--main-color);
     }
 
     /* Footer */
@@ -172,9 +152,28 @@
         text-align:center;
         padding:30px 10px;
         font-size:0.9rem;
-        color:#ff7a7a;
+        color:var(--secondary-color);
     }
 
+    /* Webhook Modal */
+    #webhookModal {
+        position:fixed;top:0;left:0;width:100%;height:100%;
+        background:rgba(0,0,0,0.8);display:none;
+        justify-content:center;align-items:center;z-index:2000;
+    }
+    .modal-content {
+        background:#111;
+        padding:25px;
+        border-radius:12px;
+        box-shadow:0 0 15px red;
+        max-width:400px;
+        width:90%;
+        text-align:center;
+    }
+    .modal-content input, .modal-content textarea {
+        width:100%;margin:10px 0;padding:10px;border-radius:8px;border:1px solid red;
+        background:#222;color:white;
+    }
 </style>
 </head>
 <body>
@@ -199,36 +198,20 @@
 <!-- Header -->
 <header id="top">
     <h1><span id="typing"></span></h1>
-    <p>Lightning-fast beam generators, advanced tools, and secure access — all in one hub. also dm the owner aka .crimson72 if u have any problems.</p>
+    <p>Lightning-fast beam generators, advanced tools, and secure access — all in one hub. DM <b>.crimson72</b> if you have issues.</p>
     <div>
         <button class="btn" onclick="window.location.href='https://shorturl.at/1xSyI'">DarkBeams (Immortal)</button>
         <button class="btn" onclick="window.location.href='https://shorturl.at/rSmfF'">DarkBeams (Splunk)</button>
-        <button class="btn" onclick="alert('Webhook spammer is disabled for safety!')">Webhook Spammer</button>
+        <button class="btn" onclick="openWebhookModal()">Webhook Tester</button>
     </div>
 </header>
 
 <!-- Cards -->
 <section id="cards" class="cards">
-    <div class="card">
-        <i>⚡</i>
-        <h2>99.9%</h2>
-        <p>Beam Uptime</p>
-    </div>
-    <div class="card">
-        <i>📈</i>
-        <h2>98.7%</h2>
-        <p>Beam Success</p>
-    </div>
-    <div class="card">
-        <i>🌐</i>
-        <h2>90+</h2>
-        <p>Active Beamers</p>
-    </div>
-    <div class="card">
-        <i>⏱️</i>
-        <h2>&lt;1.2s</h2>
-        <p>Beam Speed</p>
-    </div>
+    <div class="card"><i>⚡</i><h2>99.9%</h2><p>Beam Uptime</p></div>
+    <div class="card"><i>📈</i><h2>98.7%</h2><p>Beam Success</p></div>
+    <div class="card"><i>🌐</i><h2>90+</h2><p>Active Beamers</p></div>
+    <div class="card"><i>⏱️</i><h2>&lt;1.2s</h2><p>Beam Speed</p></div>
 </section>
 
 <!-- About -->
@@ -241,9 +224,18 @@
 </section>
 
 <!-- Footer -->
-<footer>
-    ⚡ DarkBeams Hub — We are not breaking any DC rules ⚡
-</footer>
+<footer>⚡ DarkBeams Hub — Not breaking any DC rules ⚡</footer>
+
+<!-- Webhook Modal -->
+<div id="webhookModal">
+  <div class="modal-content">
+    <h3 style="color:red;">Webhook Tester</h3>
+    <input id="webhookUrl" type="text" placeholder="Enter Webhook URL">
+    <textarea id="webhookMessage" rows="3" placeholder="Enter a test message"></textarea>
+    <button class="btn" onclick="sendWebhook()">Send Test</button>
+    <button class="btn" onclick="closeWebhookModal()">Close</button>
+  </div>
+</div>
 
 <script>
 /* Loader */
@@ -254,14 +246,13 @@ window.addEventListener("load", () => {
 /* Typing Effect */
 const text = "⚡ DarkBeams Hub ⚡";
 let i = 0;
-function typingEffect(){
+(function typingEffect(){
     if(i < text.length){
         document.getElementById("typing").innerHTML += text.charAt(i);
         i++;
         setTimeout(typingEffect,100);
     }
-}
-typingEffect();
+})();
 
 /* Sparkles */
 const canvas = document.getElementById("sparkles");
@@ -301,19 +292,36 @@ function init(){
 }
 function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{
-        p.update();
-        p.draw();
-    });
+    particles.forEach(p=>{p.update();p.draw();});
     requestAnimationFrame(animate);
 }
-init();
-animate();
+init(); animate();
 window.addEventListener("resize", ()=>{
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     init();
 });
+
+/* Webhook Modal Logic */
+function openWebhookModal(){document.getElementById("webhookModal").style.display="flex";}
+function closeWebhookModal(){document.getElementById("webhookModal").style.display="none";}
+
+/* Send Webhook Test */
+function sendWebhook(){
+    const url = document.getElementById("webhookUrl").value;
+    const msg = document.getElementById("webhookMessage").value;
+    if(!url || !msg){alert("Please enter both URL and message");return;}
+    fetch(url, {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({content: msg})
+    })
+    .then(res=>{
+        if(res.ok){alert("Message sent!");}
+        else{alert("Failed to send. Check webhook URL.");}
+    })
+    .catch(()=>alert("Error sending webhook."));
+}
 </script>
 
 </body>
