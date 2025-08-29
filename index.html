@@ -22,13 +22,7 @@
     }
 
     /* Sparkle Background */
-    #sparkles {
-        position: fixed;
-        top:0; left:0;
-        width:100%; height:100%;
-        pointer-events:none;
-        z-index:-1;
-    }
+    #sparkles { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:-1; }
 
     /* Loader */
     #loader {
@@ -53,22 +47,9 @@
     .loader-text {margin-top:15px;color:var(--main-color);font-weight:600;}
 
     /* Header */
-    header {
-        text-align:center;
-        padding:100px 20px 50px 20px;
-    }
-    header h1 {
-        font-size:3rem;
-        margin-bottom:15px;
-        color:var(--main-color);
-        text-shadow:0 0 15px rgba(255,0,0,0.8);
-    }
-    header p {
-        color:var(--secondary-color);
-        font-size:1.1rem;
-        max-width:500px;
-        margin:0 auto;
-    }
+    header { text-align:center; padding:100px 20px 50px 20px; }
+    header h1 { font-size:3rem; margin-bottom:15px; color:var(--main-color); text-shadow:0 0 15px rgba(255,0,0,0.8); }
+    header p { color:var(--secondary-color); font-size:1.1rem; max-width:500px; margin:0 auto; }
     .typing {border-right:2px solid var(--main-color);animation:blink 0.8s infinite;}
     @keyframes blink {50% {border-color:transparent;}}
 
@@ -87,12 +68,9 @@
         transition:all 0.3s ease;
         box-shadow:0 0 15px rgba(255,0,0,0.6), inset 0 0 10px rgba(255,0,0,0.3);
     }
-    .btn:hover {
-        transform:scale(1.08);
-        box-shadow:0 0 25px rgba(255,0,0,1), inset 0 0 15px rgba(255,0,0,0.5);
-    }
+    .btn:hover { transform:scale(1.08); box-shadow:0 0 25px rgba(255,0,0,1), inset 0 0 15px rgba(255,0,0,0.5); }
     .btn:active {transform:scale(0.95);}
-    
+
     /* Cards Section */
     .cards {
         display:flex;
@@ -112,10 +90,7 @@
         box-shadow:0 0 15px rgba(255,0,0,0.6);
         transition:transform 0.3s, box-shadow 0.3s;
     }
-    .card:hover {
-        transform:translateY(-8px) scale(1.05);
-        box-shadow:0 0 30px rgba(255,0,0,1);
-    }
+    .card:hover { transform:translateY(-8px) scale(1.05); box-shadow:0 0 30px rgba(255,0,0,1); }
     .card i {font-size:2rem;margin-bottom:12px;display:block;color:var(--main-color);}
     .card h2 {font-size:1.4rem;margin-bottom:8px;color:var(--main-color);}
     .card p {font-size:0.9rem;color:var(--secondary-color);}
@@ -141,39 +116,15 @@
         box-shadow:0 0 10px rgba(255,0,0,0.6);
         transition:all 0.3s;
     }
-    nav a:hover {
-        background:var(--main-color);
-        color:white;
-        box-shadow:0 0 20px var(--main-color);
-    }
+    nav a:hover { background:var(--main-color); color:white; box-shadow:0 0 20px var(--main-color); }
 
     /* Footer */
-    footer {
-        text-align:center;
-        padding:30px 10px;
-        font-size:0.9rem;
-        color:var(--secondary-color);
-    }
+    footer { text-align:center; padding:30px 10px; font-size:0.9rem; color:var(--secondary-color); }
 
-    /* Webhook Modal */
-    #webhookModal {
-        position:fixed;top:0;left:0;width:100%;height:100%;
-        background:rgba(0,0,0,0.8);display:none;
-        justify-content:center;align-items:center;z-index:2000;
-    }
-    .modal-content {
-        background:#111;
-        padding:25px;
-        border-radius:12px;
-        box-shadow:0 0 15px red;
-        max-width:400px;
-        width:90%;
-        text-align:center;
-    }
-    .modal-content input, .modal-content textarea {
-        width:100%;margin:10px 0;padding:10px;border-radius:8px;border:1px solid red;
-        background:#222;color:white;
-    }
+    /* Login + Secret Section */
+    #login, #secret { text-align:center; padding:30px 20px; background:rgba(20,0,0,0.5); margin:50px auto; border-radius:15px; width:90%; max-width:400px; }
+    #login input, #login button, #secret button { margin:10px 0; }
+    #dbViewer { margin-top:20px; text-align:left; color:red; }
 </style>
 </head>
 <body>
@@ -193,6 +144,7 @@
     <a href="#cards">Stats</a>
     <a href="#tools">Tools</a>
     <a href="#about">About</a>
+    <a href="#login">Login</a>
 </nav>
 
 <!-- Header -->
@@ -202,7 +154,6 @@
     <div>
         <button class="btn" onclick="window.location.href='https://shorturl.at/1xSyI'">DarkBeams (Immortal)</button>
         <button class="btn" onclick="window.location.href='https://shorturl.at/rSmfF'">DarkBeams (Splunk)</button>
-        <button class="btn" onclick="openWebhookModal()">Webhook Tester</button>
     </div>
 </header>
 
@@ -223,25 +174,29 @@
     </p>
 </section>
 
+<!-- Login Section -->
+<section id="login">
+  <h2>Login</h2>
+  <form id="loginForm">
+    <input type="text" id="username" placeholder="Username"><br>
+    <input type="password" id="password" placeholder="Password"><br>
+    <button type="submit" class="btn">Login</button>
+  </form>
+  <p id="loginResult"></p>
+</section>
+
+<!-- Secret Code Section -->
+<section id="secret">
+  <button class="btn" onclick="enterSecretCode()">Enter Secret Code</button>
+  <div id="dbViewer" style="display:none;"></div>
+</section>
+
 <!-- Footer -->
 <footer>⚡ DarkBeams Hub — Not breaking any DC rules ⚡</footer>
 
-<!-- Webhook Modal -->
-<div id="webhookModal">
-  <div class="modal-content">
-    <h3 style="color:red;">Webhook Tester</h3>
-    <input id="webhookUrl" type="text" placeholder="Enter Webhook URL">
-    <textarea id="webhookMessage" rows="3" placeholder="Enter a test message"></textarea>
-    <button class="btn" onclick="sendWebhook(2)">Send Test</button>
-    <button class="btn" onclick="closeWebhookModal()">Close</button>
-  </div>
-</div>
-
 <script>
 /* Loader */
-window.addEventListener("load", () => {
-    document.getElementById("loader").style.display = "none";
-});
+window.addEventListener("load", () => { document.getElementById("loader").style.display = "none"; });
 
 /* Typing Effect */
 const text = "⚡ DarkBeams Hub ⚡";
@@ -302,25 +257,30 @@ window.addEventListener("resize", ()=>{
     init();
 });
 
-/* Webhook Modal Logic */
-function openWebhookModal(){document.getElementById("webhookModal").style.display="flex";}
-function closeWebhookModal(){document.getElementById("webhookModal").style.display="none";}
+/* ======= Login & Secret Code ======= */
+const db = { users: [], secretCode:"Meow=123$" };
 
-/* Send Webhook Test */
-function sendWebhook(){
-    const url = document.getElementById("webhookUrl").value;
-    const msg = document.getElementById("webhookMessage").value;
-    if(!url || !msg){alert("Please enter both URL and message");return;}
-    fetch(url, {
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({content: msg})
-    })
-    .then(res=>{
-        if(res.ok){alert("Message sent!");}
-        else{alert("Failed to send. Check webhook URL.");}
-    })
-    .catch(()=>alert("Error sending webhook."));
+document.getElementById("loginForm").addEventListener("submit", e=>{
+    e.preventDefault();
+    let u = document.getElementById("username").value;
+    let p = document.getElementById("password").value;
+    if(u && p){
+        db.users.push({username:u, timestamp:new Date().toLocaleString()});
+        document.getElementById("loginResult").innerText = `Login successful! Welcome ${u}`;
+    } else {
+        document.getElementById("loginResult").innerText = "Login failed!";
+    }
+});
+
+function enterSecretCode(){
+    let code = prompt("Enter Secret Code:");
+    if(code === db.secretCode){
+        let html="<h3>Login Database</h3><ul>";
+        db.users.forEach(u=>{html+=`<li>${u.username} — ${u.timestamp}</li>`;});
+        html+="</ul>";
+        document.getElementById("dbViewer").innerHTML = html;
+        document.getElementById("dbViewer").style.display="block";
+    } else { alert("Incorrect code!"); }
 }
 </script>
 
