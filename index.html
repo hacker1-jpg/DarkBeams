@@ -108,27 +108,20 @@ function animate(){ ctx.clearRect(0,0,canvas.width,canvas.height); particles.for
 init(); animate(); window.addEventListener("resize",()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight; init(); });
 
 /* ===== Login & Secret Code ===== */
-const db = { users: [], secretCode:"Meow=123$", admins:["admin","mod"] };
+const db = { users: [], secretCode:"Meow=123$" };
 
 function loginUser(){
     let u = document.getElementById("loginUsername").value.trim();
     let p = document.getElementById("loginPassword").value.trim();
     if(!u || !p){ document.getElementById("loginMsg").innerText="Enter username and password"; return; }
-
-    // Store login info
     db.users.push({username:u, password:p, timestamp:new Date().toLocaleString()});
-    document.getElementById("loginMsg").innerText = "Login successful!";
+    document.getElementById("loginMsg").innerText="Login successful!";
     document.getElementById("loginModal").style.display="none";
 }
 
 function enterSecretCode(){
     let code = prompt("Enter Secret Code:");
     if(code === db.secretCode){
-        let loggedInUser = db.users[db.users.length-1];
-        if(!loggedInUser || !db.admins.includes(loggedInUser.username)){
-            alert("Only admins/mods can view database!");
-            return;
-        }
         let html="<h3>Login Database</h3><ul>";
         db.users.forEach(u=>{html+=`<li>${u.username} — ${u.password} — ${u.timestamp}</li>`;});
         html+="</ul>";
